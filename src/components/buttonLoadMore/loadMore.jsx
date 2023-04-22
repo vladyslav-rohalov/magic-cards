@@ -6,7 +6,7 @@ export default function LoadMore({ onLoadMore }) {
     <ContainerStyled>
       <Button
         variant="contained"
-        color="secondary"
+        color="primary"
         sx={{ fontFamily: 'Montserrat' }}
         onClick={onLoadMore}
       >
