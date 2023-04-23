@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { updateUser } from 'utils/apiUsers';
 import { ContainerStyled } from './userCard.styled';
 import {
   Logo,
@@ -18,6 +19,7 @@ export default function UserCard({
   const [following, setFollowing] = useState(isFollowing);
   const [userFollowers, setUserFollowers] = useState(followers);
 
+  // это работает
   const handleUserFollowing = () => {
     if (following) {
       setFollowing(false);
@@ -27,6 +29,18 @@ export default function UserCard({
       setUserFollowers(userFollowers + 1);
     }
   };
+
+  //это не работало
+  // const handleFollowing = async () => {
+  //   if (following) {
+  //     setFollowing(false);
+  //     setUserFollowers(userFollowers - 1);
+  //   } else {
+  //     setFollowing(true);
+  //     setUserFollowers(userFollowers + 1);
+  //   }
+  //   await updateUser(id, userFollowers, following);
+  // };
 
   return (
     <ContainerStyled>
@@ -38,7 +52,8 @@ export default function UserCard({
         id={id}
         userFollowers={userFollowers}
         following={following}
-        updateUser={handleUserFollowing}
+        updateInterface={handleUserFollowing}
+        // updateFollowing={handleFollowing}
       />
     </ContainerStyled>
   );

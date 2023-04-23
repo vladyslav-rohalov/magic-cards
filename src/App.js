@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import SkeletonLoader from 'components/skeleton/skeleton';
-import UserCard from 'components/userCard/userCard';
+import { getUsers } from 'utils/apiUsers';
 import LoadMore from 'components/buttonLoadMore/loadMore';
+import UserList from 'components/userList/userList';
 
 const theme = createTheme({
   palette: {
@@ -15,7 +14,7 @@ const theme = createTheme({
 
 export default function App() {
   const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 
   const handlePageChange = () => {
@@ -23,39 +22,23 @@ export default function App() {
   };
 
   useEffect(() => {
-    axios.defaults.baseURL = `https://6443d73190738aa7c078cc6d.mockapi.io`;
-    axios
-      .get(`/users?page=${page}&limit=9`)
-      .then(response => {
-        setIsLoading(true);
-        setUsers(prevArray => [].concat(prevArray, response.data));
-      })
-      .catch(function (error) {
-        throw new Error(error);
-      })
-      .finally(setIsLoading(false));
+    const fetchUsers = async () => {
+      setIsLoading(true);
+      const users = await getUsers(page);
+
+      setUsers(prevUsers => {
+        return [...prevUsers, ...users];
+      });
+
+      setIsLoading(false);
+    };
+
+    fetchUsers();
   }, [page]);
 
   return (
     <ThemeProvider theme={theme}>
-      {isLoading ? (
-        users.map(user => {
-          return (
-            <UserCard
-              key={user.id}
-              id={user.id}
-              tweets={user.tweets}
-              followers={user.followers}
-              avatar={user.avatar}
-              user={user.user}
-              isFollowing={user.isFollowing}
-            />
-          );
-        })
-      ) : (
-        <SkeletonLoader />
-      )}
-
+      <UserList users={users} isLoading={isLoading} />
       <LoadMore onLoadMore={handlePageChange} />
     </ThemeProvider>
   );

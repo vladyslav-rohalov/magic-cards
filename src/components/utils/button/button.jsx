@@ -1,10 +1,10 @@
+import { updateUser } from 'utils/apiUsers';
 import { ButtonStyled } from './button.styled';
-import axios from 'axios';
 
 export default function ButtonFollow({
   id,
   userFollowers,
-  updateUser,
+  updateInterface,
   following,
 }) {
   const color = () => {
@@ -12,25 +12,10 @@ export default function ButtonFollow({
   };
 
   const handleButtonClick = () => {
-    updateUser();
-    if (following) {
-      axios
-        .put(`users/${id}`, {
-          followers: userFollowers - 1,
-          isFollowing: false,
-        })
-        .then()
-        .catch(function (error) {
-          throw new Error(error);
-        });
-    } else {
-      axios
-        .put(`users/${id}`, { followers: userFollowers + 1, isFollowing: true })
-        .then()
-        .catch(function (error) {
-          throw new Error(error);
-        });
-    }
+    updateInterface();
+    following
+      ? updateUser(id, (userFollowers = userFollowers - 1), (following = false))
+      : updateUser(id, (userFollowers = userFollowers + 1), (following = true));
   };
 
   return (
