@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ContainerStyled = styled.div`
+export const ContainerStyled = styled.li`
   position: relative;
   width: 380px;
   height: 460px;

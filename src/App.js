@@ -17,22 +17,15 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  // const [isFollowing, setISFollowing] = useState(false);
 
   const handlePageChange = () => {
     setPage(page + 1);
   };
 
-  // const handleFollowing = value => {
-  //   setISFollowing(value);
-  //   setUsers([]);
-  //   console.log(value);
-  // };
-
   useEffect(() => {
     axios.defaults.baseURL = `https://6443d73190738aa7c078cc6d.mockapi.io`;
     axios
-      .get(`/users?page=${page}&limit=3`)
+      .get(`/users?page=${page}&limit=9`)
       .then(response => {
         setIsLoading(true);
         setUsers(prevArray => [].concat(prevArray, response.data));
@@ -55,8 +48,7 @@ export default function App() {
               followers={user.followers}
               avatar={user.avatar}
               user={user.user}
-              // onFollow={handleFollowing}
-              // isFollowing={isFollowing}
+              isFollowing={user.isFollowing}
             />
           );
         })

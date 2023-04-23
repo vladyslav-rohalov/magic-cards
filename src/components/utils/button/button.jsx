@@ -1,37 +1,41 @@
-import { useState, useEffect } from 'react';
 import { ButtonStyled } from './button.styled';
 import axios from 'axios';
 
-export default function ButtonFollow({ id, followers }) {
-  const [isFollowing, setISFollowing] = useState(false);
-
+export default function ButtonFollow({
+  id,
+  userFollowers,
+  updateUser,
+  following,
+}) {
   const color = () => {
-    return isFollowing ? '#5CD3A8' : '#ebd8ff';
+    return following ? '#5CD3A8' : '#ebd8ff';
   };
 
   const handleButtonClick = () => {
-    // onFollow(!isFollowing);
-    setISFollowing(!isFollowing);
-    isFollowing
-      ? axios
-          .put(`users/${id}`, { followers: followers - 1 })
-          .then(response => console.log(response.data.followers))
-          .catch(function (error) {
-            throw new Error(error);
-          })
-      : axios
-          .put(`users/${id}`, { followers: followers + 1 })
-          .then(response => console.log(response.data.followers))
-          .catch(function (error) {
-            throw new Error(error);
-          });
+    updateUser();
+    if (following) {
+      axios
+        .put(`users/${id}`, {
+          followers: userFollowers - 1,
+          isFollowing: false,
+        })
+        .then()
+        .catch(function (error) {
+          throw new Error(error);
+        });
+    } else {
+      axios
+        .put(`users/${id}`, { followers: userFollowers + 1, isFollowing: true })
+        .then()
+        .catch(function (error) {
+          throw new Error(error);
+        });
+    }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <ButtonStyled type="button" onClick={handleButtonClick} color={color()}>
-      {isFollowing ? 'Following' : 'Follow'}
+      {following ? 'Following' : 'Follow'}
     </ButtonStyled>
   );
 }
