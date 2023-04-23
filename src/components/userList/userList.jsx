@@ -3,7 +3,7 @@ import UserCard from 'components/userCard/userCard';
 import { UserListStyled } from './userList.styled';
 import { Container } from '@mui/material';
 
-export default function UserList({ users, isLoading }) {
+export default function UserList({ users, isLoading, onClick }) {
   return (
     <Container maxWidth="1280">
       <UserListStyled>
@@ -18,6 +18,7 @@ export default function UserList({ users, isLoading }) {
                 avatar={user.avatar}
                 user={user.user}
                 isFollowing={user.isFollowing}
+                onClick={onClick}
               />
             );
           })

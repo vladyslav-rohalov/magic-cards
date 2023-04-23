@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { getUsers } from 'utils/apiUsers';
+import { getUsers, updateUser } from 'utils/apiUsers';
 import LoadMore from 'components/buttonLoadMore/loadMore';
 import UserList from 'components/userList/userList';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 const theme = createTheme({
   palette: {
@@ -13,21 +14,40 @@ const theme = createTheme({
 });
 
 export default function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useLocalStorage('users', []);
+  const [showLimit, setShowLimit] = useState(9);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [followings, setFollowings] = useLocalStorage('followings', []);
 
   const handlePageChange = () => {
-    setPage(page + 1);
+    setPage(prevPage => prevPage + 1);
+    setShowLimit(prevLimit => prevLimit + 9);
   };
 
   useEffect(() => {
     const fetchUsers = async () => {
       setIsLoading(true);
       const users = await getUsers(page);
-
       setUsers(prevUsers => {
-        return [...prevUsers, ...users];
+        const newUser = users.map(user => {
+          if (followings.includes(user.id)) {
+            return { ...user, isFollowing: true };
+          }
+          return { ...user, isFollowing: false };
+        });
+
+        const isTwin = (a, b) => a.id === b.id;
+
+        const compareArr = (arrA, arrB, compareFunction) =>
+          arrA.filter(
+            arrAValue =>
+              !arrB.some(arrBValue => compareFunction(arrAValue, arrBValue))
+          );
+
+        const compareUsers = compareArr(prevUsers, users, isTwin);
+
+        return [...compareUsers, ...newUser];
       });
 
       setIsLoading(false);
@@ -36,9 +56,37 @@ export default function App() {
     fetchUsers();
   }, [page]);
 
+  const handleFollowing = async id => {
+    setFollowings(prevFollowings => {
+      const index = prevFollowings.indexOf(id);
+
+      setUsers(prevUsers =>
+        prevUsers.map(user => {
+          if (user.id === id) {
+            user.isFollowing = !user.isFollowing;
+            user.followers = user.isFollowing
+              ? user.followers + 1
+              : user.followers - 1;
+          }
+          return user;
+        })
+      );
+
+      if (index === -1) {
+        return [...prevFollowings, id];
+      } else {
+        prevFollowings.splice(index, 1);
+        return [...prevFollowings];
+      }
+    });
+
+    const [user] = users.filter(user => user.id === id);
+    updateUser(id, user.followers);
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <UserList users={users} isLoading={isLoading} />
+      <UserList users={users} isLoading={isLoading} onClick={handleFollowing} />
       <LoadMore onLoadMore={handlePageChange} />
     </ThemeProvider>
   );

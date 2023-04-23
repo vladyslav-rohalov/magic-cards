@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const ContainerStyled = styled.div`
   position: absolute;
   left: 50%;
-  top: 284px;
+  top: 265px;
   width: 100%;
   transform: translate(-50%, 0);
   text-transform: uppercase;

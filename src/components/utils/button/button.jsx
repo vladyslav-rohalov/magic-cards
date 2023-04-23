@@ -1,26 +1,13 @@
-import { updateUser } from 'utils/apiUsers';
 import { ButtonStyled } from './button.styled';
 
-export default function ButtonFollow({
-  id,
-  userFollowers,
-  updateInterface,
-  following,
-}) {
+export default function ButtonFollow({ id, isFollowing, onClick }) {
   const color = () => {
-    return following ? '#5CD3A8' : '#ebd8ff';
-  };
-
-  const handleButtonClick = () => {
-    updateInterface();
-    following
-      ? updateUser(id, (userFollowers = userFollowers - 1), (following = false))
-      : updateUser(id, (userFollowers = userFollowers + 1), (following = true));
+    return isFollowing ? '#5CD3A8' : '#ebd8ff';
   };
 
   return (
-    <ButtonStyled type="button" onClick={handleButtonClick} color={color()}>
-      {following ? 'Following' : 'Follow'}
+    <ButtonStyled type="button" onClick={() => onClick(id)} color={color()}>
+      {isFollowing ? 'Following' : 'Follow'}
     </ButtonStyled>
   );
 }

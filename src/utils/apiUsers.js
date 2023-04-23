@@ -11,12 +11,10 @@ export const getUsers = async (page = 1) => {
   }
 };
 
-export const updateUser = async (id, userFollowers, following) => {
-  console.log(id, userFollowers, following);
+export const updateUser = async (id, followers) => {
   try {
     const { data } = await axios.put(`/users/${id}`, {
-      followers: userFollowers,
-      isFollowing: following,
+      followers: followers,
     });
 
     return data;
