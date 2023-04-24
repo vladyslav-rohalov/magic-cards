@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export const LinkStyled = styled(Link)`
+export const LinkStyled = styled(NavLink)`
   text-decoration: none;
   color: #ebd8ff;
   font-weight: 600;

@@ -50,6 +50,6 @@ export const ButtonStyled = styled.button`
     transform: translate(-50%, -50%);
   }
   &:hover::before {
-    animation: ${rectangle} 2s infinite;
+    animation: ${rectangle} 1s infinite;
   }
 `;

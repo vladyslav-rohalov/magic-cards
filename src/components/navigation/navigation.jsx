@@ -3,8 +3,22 @@ import { NavContainer, LinkStyled } from './nafivation.styled';
 export default function Navigation() {
   return (
     <NavContainer>
-      <LinkStyled to="/home">HOME</LinkStyled>
-      <LinkStyled to="/tweets">TWEETS</LinkStyled>
+      <LinkStyled
+        to="/"
+        style={({ isActive }) => ({
+          borderBottom: isActive ? '1px solid white' : 'none',
+        })}
+      >
+        HOME
+      </LinkStyled>
+      <LinkStyled
+        to="/tweets"
+        style={({ isActive }) => ({
+          borderBottom: isActive ? '1px solid white' : 'none',
+        })}
+      >
+        TWEETS
+      </LinkStyled>
     </NavContainer>
   );
 }
