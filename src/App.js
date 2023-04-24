@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { getUsers, updateUser } from 'utils/apiUsers';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import { Container } from '@mui/material';
 import LoadMore from 'components/buttonLoadMore/loadMore';
 import UserList from 'components/userList/userList';
-import { useLocalStorage } from 'hooks/useLocalStorage';
-
+import TopBar from 'components/topBar/topBar';
+import HeaderBar from 'components/header/header';
 const theme = createTheme({
   palette: {
     primary: {
@@ -15,10 +17,12 @@ const theme = createTheme({
 
 export default function App() {
   const [users, setUsers] = useLocalStorage('users', []);
+  const [followings, setFollowings] = useLocalStorage('followings', []);
+  const [filter, setFilter] = useLocalStorage('filter', ['Show all']);
   const [showLimit, setShowLimit] = useState(9);
+  const [totalMatches, setTotalMatches] = useState(100);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [followings, setFollowings] = useLocalStorage('followings', []);
 
   const handlePageChange = () => {
     setPage(prevPage => prevPage + 1);
@@ -84,10 +88,37 @@ export default function App() {
     updateUser(id, user.followers);
   };
 
+  const handleFilter = filterValue => {
+    setFilter(filterValue);
+    setPage(1);
+    setShowLimit(9);
+    if (filterValue === 'Show all') setTotalMatches(100);
+    if (filterValue === 'Follow') setTotalMatches(100 - followings.length);
+    if (filterValue === 'Followings') setTotalMatches(followings.length);
+  };
+
+  const filtredUsers = users
+    .filter(user => {
+      if (filter === 'Show all') return users;
+      if (filter === 'Follow') return !user.isFollowing;
+      if (filter === 'Followings') return user.isFollowing;
+    })
+    .splice(0, showLimit);
+
   return (
     <ThemeProvider theme={theme}>
-      <UserList users={users} isLoading={isLoading} onClick={handleFollowing} />
-      <LoadMore onLoadMore={handlePageChange} />
+      <HeaderBar />
+      <Container maxWidth="xl">
+        <TopBar onFilterChange={handleFilter} />
+        {users && (
+          <UserList
+            users={filtredUsers}
+            isLoading={isLoading}
+            onClick={handleFollowing}
+          />
+        )}
+        <LoadMore onLoadMore={handlePageChange} />
+      </Container>
     </ThemeProvider>
   );
 }
