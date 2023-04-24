@@ -7,7 +7,14 @@ export default function LoadMore({ onLoadMore }) {
       <Button
         variant="contained"
         color="primary"
-        sx={{ fontFamily: 'Montserrat' }}
+        sx={{
+          fontFamily: 'Montserrat',
+          width: '196px',
+          height: '50px',
+          borderRadius: '10.3108px',
+          fontWeight: '600',
+          fontSize: '18px',
+        }}
         onClick={onLoadMore}
       >
         Load more

@@ -1,19 +1,13 @@
 import { useState, useEffect } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './utils/theme';
 import { getUsers, updateUser } from 'utils/apiUsers';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import { Container } from '@mui/material';
 import LoadMore from 'components/buttonLoadMore/loadMore';
 import UserList from 'components/userList/userList';
 import TopBar from 'components/topBar/topBar';
-import HeaderBar from 'components/header/header';
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4B2A99',
-    },
-  },
-});
+import HeaderBar from 'components/headerBar/headerBar';
 
 export default function App() {
   const [users, setUsers] = useLocalStorage('users', []);
@@ -40,7 +34,7 @@ export default function App() {
           }
           return { ...user, isFollowing: false };
         });
-
+        //переписать этот код
         const isTwin = (a, b) => a.id === b.id;
 
         const compareArr = (arrA, arrB, compareFunction) =>
@@ -103,6 +97,7 @@ export default function App() {
       if (filter === 'Follow') return !user.isFollowing;
       if (filter === 'Followings') return user.isFollowing;
     })
+    .sort((a, b) => b.followers - a.followers)
     .splice(0, showLimit);
 
   return (
@@ -117,7 +112,7 @@ export default function App() {
             onClick={handleFollowing}
           />
         )}
-        <LoadMore onLoadMore={handlePageChange} />
+        {totalMatches > showLimit && <LoadMore onLoadMore={handlePageChange} />}
       </Container>
     </ThemeProvider>
   );
