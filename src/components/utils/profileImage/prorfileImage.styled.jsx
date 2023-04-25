@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const LineStyled = styled.div`
   position: absolute;
-  width: 380px;
+  width: 100%;
   height: 8px;
   left: 0px;
   top: 214px;

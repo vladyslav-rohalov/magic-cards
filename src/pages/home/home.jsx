@@ -1,9 +1,10 @@
 import UserSetCard from 'components/userSetCard/userSetCard';
+import DescriptionStyled from 'components/descriptionHome/descriptionHome';
 
 export default function Home() {
   return (
     <>
-      <p>Some text... Bla-Bla-Bla</p>
+      <DescriptionStyled />
       <UserSetCard />
     </>
   );

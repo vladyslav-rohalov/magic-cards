@@ -16,8 +16,9 @@ const rectangle = keyframes`
 
 export const ButtonStyled = styled.button`
   position: absolute;
-  left: 92px;
+  left: 50%;
   top: 390px;
+  transform: translate(-50%, 0);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,7 +27,7 @@ export const ButtonStyled = styled.button`
   gap: 6px;
   width: 196px;
   height: 50px;
-  background: ${props => props.color};
+  background: #5cd3a8;
   border: none;
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
   border-radius: 10.3108px;
@@ -38,17 +39,6 @@ export const ButtonStyled = styled.button`
   text-transform: uppercase;
   color: #373737;
   cursor: pointer;
-  &::before {
-    content: '';
-    position: absolute;
-    width: 186px;
-    height: 40px;
-    border-radius: 10.3108px;
-    border: 2px solid ${props => props.color};
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
   &:hover::before {
     animation: ${rectangle} 1s infinite;
   }

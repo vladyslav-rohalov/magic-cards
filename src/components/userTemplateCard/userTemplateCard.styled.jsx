@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const ContainerStyled = styled.div`
   position: relative;
-  width: 380px;
   height: 460px;
   background: linear-gradient(
     114.99deg,
@@ -12,4 +11,11 @@ export const ContainerStyled = styled.div`
   );
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
+  @media (min-width: 769px) {
+    width: 360px;
+  }
+  @media (max-width: 768px) {
+    display: block;
+    max-width: 360px;
+  }
 `;

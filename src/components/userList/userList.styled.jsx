@@ -8,4 +8,7 @@ export const UserListStyled = styled.ul`
   justify-content: space-between;
   margin: 0;
   padding: 0;
+  @media (max-width: 840px) {
+    justify-content: center;
+  }
 `;

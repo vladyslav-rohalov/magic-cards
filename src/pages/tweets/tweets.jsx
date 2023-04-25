@@ -89,9 +89,9 @@ export default function Tweets() {
 
   const filtredUsers = users
     .filter(user => {
-      if (filter === 'Show all') return users;
       if (filter === 'Follow') return !user.isFollowing;
       if (filter === 'Followings') return user.isFollowing;
+      return users;
     })
     .sort((a, b) => b.followers - a.followers)
     .splice(0, showLimit);
@@ -99,7 +99,7 @@ export default function Tweets() {
   return (
     <>
       <TopBar onFilterChange={handleFilter} />
-      {users && (
+      {users.length > 0 && (
         <UserList
           users={filtredUsers}
           isLoading={isLoading}

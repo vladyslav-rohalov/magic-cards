@@ -16,8 +16,9 @@ const rectangle = keyframes`
 
 export const ButtonStyled = styled.button`
   position: absolute;
-  left: 92px;
+  left: 50%;
   top: 390px;
+  transform: translate(-50%, 0);
   display: flex;
   flex-direction: row;
   justify-content: center;
