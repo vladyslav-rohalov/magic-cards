@@ -4,6 +4,7 @@ import { useLocalStorage } from 'hooks/useLocalStorage';
 import LoadMore from 'components/buttonLoadMore/loadMore';
 import UserList from 'components/userList/userList';
 import TopBar from 'components/topBar/topBar';
+import { isTwin, compareArr } from 'utils/compareArr';
 
 export default function Tweets() {
   const [users, setUsers] = useLocalStorage('users', []);
@@ -22,26 +23,19 @@ export default function Tweets() {
   useEffect(() => {
     const fetchUsers = async () => {
       setIsLoading(true);
-      const users = await getUsers(page);
+
+      const fetchedUsers = await getUsers(page);
       setUsers(prevUsers => {
-        const newUser = users.map(user => {
+        const newUsers = fetchedUsers.map(user => {
           if (followings.includes(user.id)) {
             return { ...user, isFollowing: true };
           }
           return { ...user, isFollowing: false };
         });
-        //переписать этот код
-        const isTwin = (a, b) => a.id === b.id;
 
-        const compareArr = (arrA, arrB, compareFunction) =>
-          arrA.filter(
-            arrAValue =>
-              !arrB.some(arrBValue => compareFunction(arrAValue, arrBValue))
-          );
+        const compareUsers = compareArr(prevUsers, fetchedUsers, isTwin);
 
-        const compareUsers = compareArr(prevUsers, users, isTwin);
-
-        return [...compareUsers, ...newUser];
+        return [...compareUsers, ...newUsers];
       });
 
       setIsLoading(false);
@@ -74,7 +68,7 @@ export default function Tweets() {
       }
     });
 
-    const [user] = users.filter(user => user.id === id);
+    const user = users.filter(user => user.id === id);
     updateUser(id, user.followers);
   };
 
