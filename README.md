@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# Magic tweets
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Application review
 
-## Available Scripts
+![review](./assets/animateHome.gif) ![review1](./assets/animatedTweets1.gif)
+![review2](./assets/animatedTweets2.gif)
 
-In the project directory, you can run:
+<!--
+## Реалізація проекту
 
-### `npm start`
+- Проект зібраний за допомогою
+  [create-react-app](https://create-react-app.dev/).
+- Компоненти створені з використанням бібліотеки
+  [MUI](https://mui.com/material-ui/getting-started/overview/)
+- В якості `backend` використано [mockapi.io](https://mockapi.io/)
+- Бібліотеки управління станом не використовувались. Всі необхідні дані для
+  коректної роботи додатку зберігаються в `localStorage`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Реалізовано:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Головна сторінка з коротким описом про додаток
+2. Сторінка `Tweets`, на якій відображаються картки з інформацією про `tweet`
+   (імʼя, кількість твіттів, підписників та кнопка Follow з можливістю
+   підписатись на `tweet`)
+3. Пагінація як, при запиті на `backend`, так і при відмалюванні карток на
+   сторінці
+4. Кнопа `back` для повернення на попередню сторінку
+5. `Dropdown` з можливістю фільтрації карток за станом `follow`
+6. Автоматичне перенаправлення користувача у випадку переходу на неіснуючій
+   `route`
+7. Кнопка `load more` для отримання додаткових `tweets`. У випадку, коли
+   отримано всі існуючі `tweets` - кнопка не відображається
+8. Збереження стану `filter` при оновленні сторінки, або переході на іншу
+9. Інофрмація про стано 'follow' зберігажться не на `backend`, а у кожного
+   користувача локально, що дає змогу користуватись додатком одночасно декільком
+   користувачам (див. приклад далі)
 
-### `npm test`
+![Пункт 9](./assets/prev-1.gif)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Стек технологій
 
-### `npm run build`
+![JavaScrip](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![MUI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# [Жива сторінка](https://yuriipohorilets.github.io/test-task-tweets/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Тестове завдання:
 
-### `npm run eject`
+**Мета:** створити картки твітів та додати інтерактивності при клікові на
+кнопку.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Загальний вигляд картки у двох станах - Follow та Following](./assets/prev-0.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<sub>Загальний вигляд картки у двох станах - `Follow` та `Following`</sub>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Критерії виконання
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Верстка фіксована в `рх`, семантична та валідна.
+- Немає помилок в консолі браузера.
+- Робота виконана на нативному `JS` з використанням зборщиків або на `React`.
+- Інтерактивність працює відповідно до технічного завдання.
+- Код відформатований та без коментарів.
+- В репозиторії має бути описаний `README.md`. Коротка
+  [стаття](https://medium.com/nuances-of-programming/%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C-%D0%BA%D1%80%D0%B0%D1%81%D0%B8%D0%B2%D1%8B%D0%B9-%D0%B8-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-readme-md-6cc09ef8277),
+  з рекомендаціями щодо оформлення..
 
-## Learn More
+## Технічне завдання
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Відповідно до
+   [макету](https://www.figma.com/file/zun1oP6NmS2Lmgbcj6e1IG/Test?node-id=0-1&t=uUlaHyxCuOAc20AW-0)
+   потрібно реалізувати картки юзера.
+2. При клікові на кнопку `Follow` - текст змінюється на `Following`. Також
+   змінюється колір кнопки. А до кількості фоловерів додається і ваш. Тобто,
+   початкова кількість складає 100,500 фоловерів. При клікові на кнопку буде
+   100,501.
+3. При оновлені сторінки має фіксуватись кінцевий результат дій юзера. Тобто,
+   якщо клікнути по кнопці і оновити сторінку - то кнопка все рівно залишається
+   в стані `Following` із відповідним кольором, а кількість фоловерів НЕ
+   зменшується до початкового значення.
+4. При повторному клікові на кнопку її текст та колір змінюються до початкового
+   стану. Також змінюється і кількість фоловерів. Вона зменшується на 1
+   (100,500).
+5. В коді цифра 100,500 має бути прописана одним значенням (100500). В UI -
+   виведено через кому (100,500).
+6. Створи свій персональний бекенд для розробки за допомогою UI-сервісу
+   `mockapi.io`. Створи ресурс `users`.
+7. Використай конструктор ресурсу та опиши об'єкт юзера, як описано вище.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### User
 
-### Code Splitting
+1. Створюєте локальну базу даних (окремий файл `json`) з наступними полями:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   - `id`,
+   - `user`,
+   - `tweets`,
+   - `followers`,
+   - `avatar`
 
-### Analyzing the Bundle Size
+<sub><i>(див. код нижче).</i></sub>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. Зображення аватарів мають бути прописані окремими url у властивості `avatar`.
+   Можете підібрати їх самостійно.
+3. Має бути від 30 юзерів з різними даними (на ваш розсуд) в базі. Зроби
+   пагінацію. На одній сторінці пагінації має відображатися від 8 до 12 твітів,
+   решта підгружатись при натисканні `Load More`
+4. Відповідно до бази потрібно згенерувати відповідну кількість карток на
+   фронт-частині застосунку.
+5. Кожна картка має бути незалежною функціонально одна від одної.
+6. Решта вимог аналогічні до вищеописаного технічного завдання.
 
-### Making a Progressive Web App
+```json
+[
+  {
+    "id": 1,
+    "user": "Elon Reeve Musk",
+    "tweets": 777,
+    "followers": 100500,
+    "avatar": "url.jpg"
+  }
+]
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Додаткове завдання
 
-### Advanced Configuration
+> За виконання вам будуть нараховані додаткові бали! Без виконання додаткового
+> завдання ви не зможете отримати максимальний бал.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Створи маршрутизацію, використовуючи `React Router`.
+- У застосунку повинні бути такі маршрути. Якщо користувач зайшов за неіснуючим
+  маршрутом, його необхідно перенаправляти на домашню сторінку.
+- `'/'` – компонент `Home`, домашня сторінка. (Стилізація та оформлення на ваш
+  розсуд);
+- `'/tweets’` - компонент `tweets`, сторінка із відображенням твітів На сторінці
+  `tweets` має бути кнопка `Back`, яка веде на головну сторінку.
 
-### Deployment
+## Завдання із зірочкою
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Додай фільтрацію. Це має бути `Dropdown` із 3 опціями (оформлення на ваш
+розсуд): `show all`, `follow`, `followings`
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `show all` - показати всі твіти.
+- `follow` - показати твіти, у яких стан `follow`.
+- `followings` - показати твіти, у яких стан `following` -->
