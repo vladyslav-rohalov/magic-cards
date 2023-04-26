@@ -12,7 +12,7 @@ export default function Navigation() {
         HOME
       </LinkStyled>
       <LinkStyled
-        to="/tweets"
+        to="tweets"
         style={({ isActive }) => ({
           borderBottom: isActive ? '1px solid white' : 'none',
         })}
