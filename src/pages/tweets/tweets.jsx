@@ -44,7 +44,7 @@ export default function Tweets() {
     };
 
     fetchUsers();
-  }, [page]);
+  }, [page, followings, setUsers]);
 
   const handleFollowing = async id => {
     setFollowings(prevFollowings => {
