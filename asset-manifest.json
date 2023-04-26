@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/magic-cards/static/css/main.1e7f0df5.css",
-    "main.js": "/magic-cards/static/js/main.dc0fb2f1.js",
+    "main.js": "/magic-cards/static/js/main.089159d8.js",
     "static/js/316.ee5e9b5a.chunk.js": "/magic-cards/static/js/316.ee5e9b5a.chunk.js",
     "static/js/146.3be2d331.chunk.js": "/magic-cards/static/js/146.3be2d331.chunk.js",
     "static/js/172.f732bc5a.chunk.js": "/magic-cards/static/js/172.f732bc5a.chunk.js",
@@ -9,13 +9,13 @@
     "static/media/logo.svg": "/magic-cards/static/media/logo.e917114d7945c04c85a8946a331d28b6.svg",
     "index.html": "/magic-cards/index.html",
     "main.1e7f0df5.css.map": "/magic-cards/static/css/main.1e7f0df5.css.map",
-    "main.dc0fb2f1.js.map": "/magic-cards/static/js/main.dc0fb2f1.js.map",
+    "main.089159d8.js.map": "/magic-cards/static/js/main.089159d8.js.map",
     "316.ee5e9b5a.chunk.js.map": "/magic-cards/static/js/316.ee5e9b5a.chunk.js.map",
     "146.3be2d331.chunk.js.map": "/magic-cards/static/js/146.3be2d331.chunk.js.map",
     "172.f732bc5a.chunk.js.map": "/magic-cards/static/js/172.f732bc5a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1e7f0df5.css",
-    "static/js/main.dc0fb2f1.js"
+    "static/js/main.089159d8.js"
   ]
 }
