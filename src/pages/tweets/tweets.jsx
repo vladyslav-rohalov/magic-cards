@@ -44,7 +44,10 @@ export default function Tweets() {
     };
 
     fetchUsers();
-  }, [page, followings, setUsers]);
+
+    /* eslint-disable */
+  }, [page]);
+  /* eslint-enable */
 
   const handleFollowing = async id => {
     setFollowings(prevFollowings => {
