@@ -1,8 +1,8 @@
 {
-  "name": "magic-tweets",
+  "name": "tech-task-goit",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vladyslav-rohalov.github.io/magic-tweets/",
+  "homepage": "https://vladyslav-rohalov.github.io/tech-task-goit/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
