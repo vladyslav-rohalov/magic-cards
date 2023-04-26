@@ -1,8 +1,15 @@
 # Magic tweets
 
-## Application review
+## Application review Home page
 
-![review](./assets/animateHome.gif) ![review1](./assets/animatedTweets1.gif)
+![review](./assets/animateHome.gif)
+
+## Application review Tweets page
+
+![review1](./assets/animatedTweets1.gif)
+
+##
+
 ![review2](./assets/animatedTweets2.gif)
 
 <!--
