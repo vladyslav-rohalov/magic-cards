@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getUsers, updateUser } from 'utils/apiUsers';
+import { getUsers, updateUser } from '../../utils/apiUsers';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import { isTwin, compareArr } from 'utils/compareArr';
 import LoadMore from 'components/buttonLoadMore/loadMore';
