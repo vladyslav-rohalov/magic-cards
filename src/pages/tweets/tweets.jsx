@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getUsers, updateUser } from 'utils/apiUsers';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import { isTwin, compareArr } from 'utils/compareArr';
 import LoadMore from 'components/buttonLoadMore/loadMore';
 import UserList from 'components/userList/userList';
 import TopBar from 'components/topBar/topBar';
-import { isTwin, compareArr } from 'utils/compareArr';
+import TopButton from 'components/topButton/topButton';
 
 export default function Tweets() {
   const [users, setUsers] = useLocalStorage('users', []);
@@ -14,6 +15,7 @@ export default function Tweets() {
   const [totalMatches, setTotalMatches] = useState(100);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [pageScroll, setPageScroll] = useState(false);
 
   const handlePageChange = () => {
     setPage(prevPage => prevPage + 1);
@@ -90,6 +92,12 @@ export default function Tweets() {
     .sort((a, b) => b.followers - a.followers)
     .splice(0, showLimit);
 
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      window.scrollY > 100 ? setPageScroll(true) : setPageScroll(false);
+    });
+  }, []);
+
   return (
     <>
       <TopBar onFilterChange={handleFilter} />
@@ -101,6 +109,7 @@ export default function Tweets() {
         />
       )}
       {totalMatches > showLimit && <LoadMore onLoadMore={handlePageChange} />}
+      {pageScroll && <TopButton />}
     </>
   );
 }
